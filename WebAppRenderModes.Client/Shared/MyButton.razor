@@ -1,0 +1,20 @@
+<button @onclick="ButtonClicked">Click Me!</button>
+
+<span>@_text</span>
+
+<span>@SuccessMessage</span>
+
+@code {
+    [Parameter] public string SuccessMessage { get; set; } = string.Empty;
+    [Parameter] public EventCallback OnButtonClick { get; set; }
+
+    string _text = string.Empty;
+
+    async Task ButtonClicked()
+    {
+        _text = "Button Clicked!";
+
+        await OnButtonClick.InvokeAsync();
+    }
+
+}

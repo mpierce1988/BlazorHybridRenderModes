@@ -1,0 +1,44 @@
+@using WebAppRenderModes.Shared
+<h3>TestComponent</h3>
+
+<br />
+
+<InputText @bind-Value="_inputText" />
+
+<br />
+
+<span>@_inputText</span>
+
+<button @onclick="SetNewTestText">Set New Test Text</button>
+
+<br/>
+
+<button @onclick="GetTestText">Get Test Text</button>
+
+<button @onclick="ResetTestText">Reset Test Text</button>
+
+@code {
+    [Inject] private TestService TestingService { get; set; }
+
+    private string _inputText = string.Empty;
+
+    void GetTestText()
+    {
+        _inputText = TestingService.GetTestMessage();
+    }
+
+    void SetTestMessage(string message)
+    {
+        TestingService.SetTestMessage(message);
+    }
+
+    void SetNewTestText()
+    {
+        SetTestMessage(_inputText);
+    }
+
+    void ResetTestText()
+    {
+        SetTestMessage(string.Empty);
+    }
+}

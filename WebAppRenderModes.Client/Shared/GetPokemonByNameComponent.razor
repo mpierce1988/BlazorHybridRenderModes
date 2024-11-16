@@ -1,0 +1,24 @@
+<h3>Pokemon</h3>
+
+<br/>
+
+<h5>Search for a Pokemon:</h5>
+<br/>
+
+<SearchTextBox OnSearch="Search" ResultFound="@(_pokemon is not null)" OnReset="Reset"/>
+
+<br/>
+
+@if (_isLoading)
+{
+    <p>Loading...</p>
+}
+
+@if (_pokemon is not null)
+{
+    <PokemonBasicInfoCard Pokemon="_pokemon"/>
+}
+else if (!string.IsNullOrEmpty(_errorMessage))
+{
+    <p>Error: @_errorMessage</p>
+}

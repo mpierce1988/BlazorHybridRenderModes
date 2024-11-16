@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppRenderModes", "WebAppRenderModes\WebAppRenderModes.csproj", "{8FFE4113-B36A-4141-980B-E840B6487A32}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppRenderModes.Client", "WebAppRenderModes.Client\WebAppRenderModes.Client.csproj", "{3E190A68-AF39-4C1D-A31E-B2FB8D1CB789}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppRenderModes.Shared", "WebAppRenderModes.Shared\WebAppRenderModes.Shared.csproj", "{B63041CA-B7F6-41C5-97B7-AC76F5FE9AFA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8FFE4113-B36A-4141-980B-E840B6487A32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FFE4113-B36A-4141-980B-E840B6487A32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FFE4113-B36A-4141-980B-E840B6487A32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FFE4113-B36A-4141-980B-E840B6487A32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E190A68-AF39-4C1D-A31E-B2FB8D1CB789}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E190A68-AF39-4C1D-A31E-B2FB8D1CB789}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E190A68-AF39-4C1D-A31E-B2FB8D1CB789}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E190A68-AF39-4C1D-A31E-B2FB8D1CB789}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B63041CA-B7F6-41C5-97B7-AC76F5FE9AFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B63041CA-B7F6-41C5-97B7-AC76F5FE9AFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B63041CA-B7F6-41C5-97B7-AC76F5FE9AFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B63041CA-B7F6-41C5-97B7-AC76F5FE9AFA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
