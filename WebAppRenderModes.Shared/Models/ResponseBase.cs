@@ -1,4 +1,4 @@
-namespace WebAppRenderModes.Shared;
+namespace WebAppRenderModes.Shared.Models;
 
 public abstract class ResponseBase
 {

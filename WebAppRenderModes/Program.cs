@@ -15,6 +15,12 @@ public class Program
             .AddInteractiveServerComponents()
             .AddInteractiveWebAssemblyComponents();
         
+        // Add Http Client
+        builder.Services.AddHttpClient();
+        
+        // Add Blazor Bootstrap
+        builder.Services.AddBlazorBootstrap();
+        
         builder.Services.RegisterServices();
 
         var app = builder.Build();

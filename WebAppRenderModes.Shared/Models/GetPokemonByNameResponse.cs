@@ -1,6 +1,6 @@
 using PokeApiNet;
 
-namespace WebAppRenderModes.Shared;
+namespace WebAppRenderModes.Shared.Models;
 
 public sealed class GetPokemonByNameResponse : ResponseBase
 {

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using WebAppRenderModes.Shared;
+using WebAppRenderModes.Shared.Services;
 
 namespace WebAppRenderModes.Client.Shared;
 

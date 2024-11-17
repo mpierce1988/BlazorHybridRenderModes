@@ -1,7 +1,8 @@
 using System.Net;
 using PokeApiNet;
+using WebAppRenderModes.Shared.Models;
 
-namespace WebAppRenderModes.Shared;
+namespace WebAppRenderModes.Shared.Services;
 
 public class PokemonService : IPokemonService
 {
