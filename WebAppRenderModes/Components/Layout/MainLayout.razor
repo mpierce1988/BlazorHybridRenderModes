@@ -1,5 +1,24 @@
-﻿@inherits LayoutComponentBase
+﻿@using System.Collections
+@inherits LayoutComponentBase
 
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="bb-top-row px-4 d-flex justify-content-end">
+            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+        </div>
+
+        <article class="content px-4">
+            <div class="py-2">
+                @Body
+            </div>
+        </article>
+    </main>
+</div>
+@*
 <div class="page">
     <div class="sidebar">
         <NavMenu/>
@@ -17,3 +36,38 @@
         </article>
     </main>
 </div>
+*@
+
+
+@code {
+
+    private Sidebar? _sidebar;
+
+    private IEnumerable<NavItem> _navItems = new[]
+    {
+        new NavItem() { Id = "1", Href = "/", IconName = IconName.HouseDoorFill, Text = "Home", Match = NavLinkMatch.All },
+        new NavItem() { Id = "2", Href = "/weather", IconName = IconName.Cloud, Text = "Weather" },
+        new NavItem() { Id = "3", Href = "/pokemon", IconName = IconName.Backpack, Text = "Pokemon" },
+    };
+
+    protected override async Task OnInitializedAsync()
+    {
+        if(_sidebar is not null)
+            await _sidebar.RefreshDataAsync();
+        
+        await base.OnInitializedAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await _sidebar.RefreshDataAsync(firstRender);
+        
+        await base.OnAfterRenderAsync(firstRender);
+    }
+
+    private async Task<SidebarDataProviderResult> SidebarDataProvider(SidebarDataProviderRequest request)
+    {
+        return await Task.FromResult(request.ApplyTo(_navItems));
+    }
+
+}

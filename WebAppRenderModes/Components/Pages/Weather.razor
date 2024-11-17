@@ -1,58 +1,9 @@
 ﻿@page "/weather"
-@using Microsoft.AspNetCore.Components.Forms
-@using Microsoft.AspNetCore.Components.Web
-@using WebAppRenderModes.Client.Shared
 @rendermode @(new InteractiveServerRenderMode(false))
 
 <PageTitle>Weather</PageTitle>
 
-<EditForm Model="_request" OnValidSubmit="GetWeather">
-    <DataAnnotationsValidator/>
-
-    <div class="card" style="width: 25rem;">
-        <div class="card-body">
-            <h5 class="card-title">Weather API</h5>
-            <p class="card-subtitle">Open-Meteo.com</p>
-            <p class="card-text">Enter the latitude and longitude to get the weather forecast.</p>
-            <p class="card-text">
-                <ValidationSummary/>
-            </p>
-        </div>
-
-        <div class="card-body">
-            <button type="button" class="btn btn-secondary" @onclick="ShowSearchLocationDialog">Search Locations</button>
-        </div>
-
-        <ul class="list-group list-group-flush">
-            <li>
-                <div class="form-group">
-                    <label for="latitude">Latitude</label>
-                    <InputNumber id="latitude" class="form-control" @bind-Value="_request.Latitude"/>
-                </div>
-            </li>
-            <li>
-                <div class="form-group">
-                    <label for="longitude">Longitude</label>
-                    <InputNumber id="longitude" class="form-control" @bind-Value="_request.Longitude"/>
-                </div>
-            </li>
-            <li>
-                <div class="form-group">
-                    <label for="forecastDays">Days To Forecast</label>
-                    <InputNumber id="forecastDays" class="form-control" @bind-Value="_request.ForecastDays"/>
-                </div>
-            </li>
-        </ul>
-
-        <div class="card-body">
-            <button type="submit" class="btn btn-primary">Get Weather</button>
-        </div>
-    </div>
-</EditForm>
-
-<SearchSelectLocationDialog @ref="_searchSelectLocationDialog" OnClose="CloseSearchLocationDialog" Locations="_locations"
-                            OnSearchLocation="SearchLocations" OnLocationSelected="SelectLocation"/>
-
+<SearchWeatherLatitudeLongitude Locations="_locations" OnSearchLocation="SearchLocations" OnSearchWeather="GetWeather"/>
 <br/>
 
 @if (_errorMessage is not null)
@@ -71,31 +22,5 @@
 
 @if (_response is not null && _response.IsSuccess)
 {
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th scope="col">Date</th>
-            <th scope="col">Weather Code</th>
-            <th scope="col">Max Temp</th>
-            <th scope="col">Min Temp</th>
-            <th scope="col">Total Precipitation</th>
-            <th scope="col">Max Wind Speed</th>
-            <th scope="col">Max Wind Gust Speed</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var weatherData in _response.DailyWeatherInfo)
-        {
-            <tr>
-                <th scope="row">@(weatherData.Date.ToShortDateString())</th>
-                <td>@weatherData.WeatherCode</td>
-                <td>@(string.Concat(weatherData.TemperatureTwoMeterMax, " ", "Celsius"))</td>
-                <td>@(string.Concat(weatherData.TemperatureTwoMeterMin, " ", "Celsius"))</td>
-                <td>@weatherData.PrecipitationSum</td>
-                <td>@(string.Concat(weatherData.WindSpeedTenMeterMax, " ", "km/h"))</td>
-                <td>@(string.Concat(weatherData.WindGustsTenMeterMax, " ", "km/h"))</td>
-            </tr>
-        }
-        </tbody>
-    </table>
+    <WeatherInfoGrid DailyWeatherInfo="@_response.DailyWeatherInfo" />
 }

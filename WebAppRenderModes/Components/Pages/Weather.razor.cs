@@ -8,9 +8,6 @@ namespace WebAppRenderModes.Components.Pages;
 public partial class Weather
 {
     [Inject] public required IWeatherService WeatherService { get; set; }
-
-    private GetWeatherByLocationRequest _request = new();
-
     private GetWeatherByLocationResponse? _response;
 
     private bool _isLoading = false;
@@ -18,10 +15,8 @@ public partial class Weather
     
     // Location Search
     private List<Location> _locations = new();
-
-    private SearchSelectLocationDialog? _searchSelectLocationDialog;
     
-    private async Task GetWeather()
+    private async Task GetWeather(GetWeatherByLocationRequest request)
     {
         _isLoading = true;
         
@@ -30,7 +25,7 @@ public partial class Weather
             _response = null;
             _errorMessage = null;
 
-            GetWeatherByLocationResponse response = await WeatherService.GetWeatherByLocationAsync(_request);
+            GetWeatherByLocationResponse response = await WeatherService.GetWeatherByLocationAsync(request);
 
             if (!response.IsSuccess)
             {
@@ -49,16 +44,6 @@ public partial class Weather
             _isLoading = false;
             await Task.Yield(); // Force a re-render
         }
-    }
-
-    private async Task ShowSearchLocationDialog()
-    {
-        if(_searchSelectLocationDialog is not null)
-            await _searchSelectLocationDialog.ShowDialog();
-    }
-    
-    private void CloseSearchLocationDialog()
-    {
     }
 
     private async Task SearchLocations(string location)
@@ -82,12 +67,5 @@ public partial class Weather
             _errorMessage = e.Message;
             _locations = new();
         }
-    }
-    
-    private async Task SelectLocation(Location location)
-    {
-        _request.Latitude = location.Latitude;
-        _request.Longitude = location.Longitude;
-        await Task.Yield(); // Force a re-render
     }
 }

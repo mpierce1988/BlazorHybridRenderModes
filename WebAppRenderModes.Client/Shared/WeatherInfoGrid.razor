@@ -1,0 +1,28 @@
+@using WebAppRenderModes.Shared.Models.Weather
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Weather Code</th>
+        <th scope="col">Max Temp</th>
+        <th scope="col">Min Temp</th>
+        <th scope="col">Total Precipitation</th>
+        <th scope="col">Max Wind Speed</th>
+        <th scope="col">Max Wind Gust Speed</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (DailyWeatherInfo weatherData in DailyWeatherInfo)
+    {
+        <tr>
+            <th scope="row">@(weatherData.Date.ToShortDateString())</th>
+            <td>@weatherData.WeatherCode</td>
+            <td>@(string.Concat(weatherData.TemperatureTwoMeterMax, " ", "Celsius"))</td>
+            <td>@(string.Concat(weatherData.TemperatureTwoMeterMin, " ", "Celsius"))</td>
+            <td>@weatherData.PrecipitationSum</td>
+            <td>@(string.Concat(weatherData.WindSpeedTenMeterMax, " ", "km/h"))</td>
+            <td>@(string.Concat(weatherData.WindGustsTenMeterMax, " ", "km/h"))</td>
+        </tr>
+    }
+    </tbody>
+</table>
