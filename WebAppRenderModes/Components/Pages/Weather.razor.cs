@@ -12,12 +12,14 @@ public partial class Weather
 
     private bool _isLoading = false;
     private string? _errorMessage;
+    private GetWeatherByLocationRequest? _lastRequest;
     
     // Location Search
     private List<Location> _locations = new();
     
     private async Task GetWeather(GetWeatherByLocationRequest request)
     {
+        _lastRequest = request;
         _isLoading = true;
         
         try

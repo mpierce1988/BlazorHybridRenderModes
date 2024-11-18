@@ -18,10 +18,17 @@ public partial class SearchWeatherLatitudeLongitude : ComponentBase
 
     private SearchSelectLocationDialog? _searchSelectLocationDialog;
 
+    private bool _isLoadingWeather = false;
+
     private async Task SearchWeather()
     {
         if (OnSearchWeather.HasDelegate)
+        {
+            _isLoadingWeather = true;
             await OnSearchWeather.InvokeAsync(SearchRequest);
+            _isLoadingWeather = false;
+        }
+            
     }
 
     private async Task SearchLocation(string searchText)

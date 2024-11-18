@@ -8,7 +8,7 @@
             <CardText>Enter the latitude and longitude to get the weather forecast.</CardText>
         </CardBody>
         <CardBody>
-            <Button Type="ButtonType.Button" Color="ButtonColor.Info" @onclick="ShowSearchLocationDialog">Search Locations</Button>
+            <Button Type="ButtonType.Button" Color="ButtonColor.Success" @onclick="ShowSearchLocationDialog">Search Locations</Button>
         </CardBody>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
@@ -31,7 +31,13 @@
             </li>
         </ul>
         <CardBody>
-            <Button Type="ButtonType.Submit" Color="ButtonColor.Primary">Get Weather</Button>
+            <Button Type="ButtonType.Submit" Color="ButtonColor.Primary">
+                Get Weather
+                @if (_isLoadingWeather)
+                {
+                    <Spinner Color="SpinnerColor.Light" Type="SpinnerType.Dots" Size="SpinnerSize.Small" />
+                }
+            </Button>
         </CardBody>
     </Card>
 </EditForm>

@@ -1,4 +1,41 @@
 @using WebAppRenderModes.Shared.Models.Weather
+@using WebAppRenderModes.Shared.Utilities
+
+<Grid TItem="DailyWeatherInfo" DataProvider="WeatherInfoDataProvider" AllowFiltering="false" AllowPaging="false" 
+      AllowSorting="false" Class="table table-hover table-bordered table-striped" FixedHeader="true" >
+    <GridColumn TItem="DailyWeatherInfo" HeaderText="Date" TextAlignment="Alignment.Center">
+        <p>@context.Date.DayOfWeek.ToString()</p>
+        <p>@context.Date.ToShortDateString()</p>
+    </GridColumn>
+    <GridColumn TItem="DailyWeatherInfo" HeaderText="Forecast" TextAlignment="Alignment.Center">
+        @{
+            int weatherCode = context.WeatherCode ?? 0;
+            string iconClass = WeatherCodeUtility.GetIconClass(weatherCode);
+            string displayClass = string.Concat("wi", " ", iconClass);
+            string description = WeatherCodeUtility.GetDescription(weatherCode);
+            
+            <div><Icon CustomIconName="@(displayClass)" Size="IconSize.x3"/></div>
+            <p>@description</p>
+        }
+    </GridColumn>
+    <GridColumn TItem="DailyWeatherInfo" HeaderText="Min Temp" TextAlignment="Alignment.Center">
+        @string.Concat(context.TemperatureTwoMeterMin, "\u00b0 ", "Celsius")
+    </GridColumn>
+    <GridColumn TItem="DailyWeatherInfo" HeaderText="Max Temp" TextAlignment="Alignment.Center">
+        @string.Concat(context.TemperatureTwoMeterMax, "\u00b0 ", "Celsius")
+    </GridColumn>
+    
+    <GridColumn TItem="DailyWeatherInfo" HeaderText="Total Precipitation" TextAlignment="Alignment.Center">
+        @(string.Concat(context.PrecipitationSum, " ", "mm"))
+    </GridColumn>
+    <GridColumn TItem="DailyWeatherInfo" HeaderText="Max Wind Speed" TextAlignment="Alignment.Center">
+        @string.Concat(context.WindSpeedTenMeterMax, " ", "km/h")
+    </GridColumn>
+    <GridColumn TItem="DailyWeatherInfo" HeaderText="Max Wind Gust Speed" TextAlignment="Alignment.Center">
+        @string.Concat(context.WindGustsTenMeterMax, " ", "km/h")
+    </GridColumn>
+</Grid>
+@*
 <table class="table table-striped">
     <thead>
     <tr>
@@ -26,3 +63,4 @@
     }
     </tbody>
 </table>
+*@
