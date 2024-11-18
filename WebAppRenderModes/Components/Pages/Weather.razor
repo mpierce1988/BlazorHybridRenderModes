@@ -1,26 +1,31 @@
 ﻿@page "/weather"
+@using WebAppRenderModes.Client.Shared.Weather
 @rendermode @(new InteractiveServerRenderMode(false))
 
 <PageTitle>Weather</PageTitle>
 
-<SearchWeatherLatitudeLongitude Locations="_locations" OnSearchLocation="SearchLocations" OnSearchWeather="GetWeather"/>
-<br/>
+<div class="row justify-content-center">
+    <div class="col-xs-12 col-xl-4">
+        <SearchWeatherLatitudeLongitude Locations="_locations" OnSearchLocation="SearchLocations" OnSearchWeather="GetWeather"/>
+    </div>
+    <div class="col-xs-12 col-xl-8">
+        @if (_errorMessage is not null)
+        {
+            <Callout Color="CalloutColor.Danger">
+                @_errorMessage
+            </Callout>
+        }
 
-@if (_errorMessage is not null)
-{
-    <Callout Color="CalloutColor.Danger">
-        @_errorMessage
-    </Callout>
-}
+        @if (_isLoading)
+        {
+            <Callout Color="CalloutColor.Info">
+                Loading...
+            </Callout>
+        }
 
-@if (_isLoading)
-{
-    <Callout Color="CalloutColor.Info">
-        Loading...
-    </Callout>
-}
-
-@if (_response is not null && _response.IsSuccess)
-{
-    <WeatherInfoGrid DailyWeatherInfo="@_response.DailyWeatherInfo" />
-}
+        @if (_response is not null && _response.IsSuccess)
+        {
+            <WeatherInfoGrid DailyWeatherInfo="@_response.DailyWeatherInfo" />
+        }
+    </div>
+</div>

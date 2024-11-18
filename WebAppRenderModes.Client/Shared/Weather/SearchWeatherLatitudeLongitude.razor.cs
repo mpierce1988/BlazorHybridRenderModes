@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Components;
 using WebAppRenderModes.Shared.Models.Weather;
 
-namespace WebAppRenderModes.Client.Shared;
+namespace WebAppRenderModes.Client.Shared.Weather;
 
 public partial class SearchWeatherLatitudeLongitude : ComponentBase
 {

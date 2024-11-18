@@ -1,11 +1,10 @@
 using Microsoft.AspNetCore.Components;
-using PokeApiNet;
 
-namespace WebAppRenderModes.Client.Shared;
+namespace WebAppRenderModes.Client.Shared.Pokemon;
 
 public partial class PokemonBasicInfoCard : ComponentBase
 {
     [EditorRequired]
     [Parameter] 
-    public required Pokemon Pokemon { get; set; }
+    public required PokeApiNet.Pokemon Pokemon { get; set; }
 }

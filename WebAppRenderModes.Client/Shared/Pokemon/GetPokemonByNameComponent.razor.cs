@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Components;
-using WebAppRenderModes.Shared;
 using WebAppRenderModes.Shared.Services;
 
-namespace WebAppRenderModes.Client.Shared;
+namespace WebAppRenderModes.Client.Shared.Pokemon;
 
 public partial class GetPokemonByNameComponent : ComponentBase
 {

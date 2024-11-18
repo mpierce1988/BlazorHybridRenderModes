@@ -1,0 +1,62 @@
+@using WebAppRenderModes.Shared.Models.Weather
+<Modal @ref="_modal" Title="Search Location" OnHidden="OnClose" Size="ModalSize.ExtraLarge" 
+       Fullscreen="ModalFullscreen.MediumDown" IsVerticallyCentered="true">
+    <BodyTemplate>
+        <EditForm Model="_inputModel" OnSubmit="SearchLocation">
+            <div class="mb-3">
+                <label for="location">Enter Location</label>
+                <InputText @bind-Value="_inputModel.SearchText" class="form-control" id="location"/>
+            </div>
+            <Button Type="ButtonType.Submit" Color="ButtonColor.Success">
+                Search
+                @if (_isLoading)
+                {
+                <Spinner Type="SpinnerType.Dots" Color="SpinnerColor.Light"/>
+                }
+            </Button>
+        </EditForm>
+        
+        @if (_errorMessage is not null)
+        {
+            <Callout Color="CalloutColor.Danger">
+                @_errorMessage
+            </Callout>
+        }
+        
+        @if (Locations.Count > 0)
+        {
+            <p>Locations Found: @(Locations.Count)</p>
+            
+            <Grid @ref="_grid" TItem="Location" Class="table table-hover table-bordered table-striped" DataProvider="LocationsDataProvider" 
+                  AllowFiltering="true" AllowPaging="true" PageSize="20" AllowSorting="true" Responsive="true" >
+                <GridColumns>
+                    <GridColumn TItem="Location" HeaderText="" PropertyName="" Filterable="false" Sortable="false">
+                        <Button Color="ButtonColor.Primary" Outline="@true" @onclick="async () => await SelectLocation(context)">
+                            <Icon Name="IconName.PlusSquareFill" />
+                        </Button>
+                    </GridColumn>
+                    <GridColumn TItem="Location" HeaderText="Name" PropertyName="Name"
+                                SortKeySelector="location => location.Name" Filterable="true" Sortable="true">
+                        @context.Name
+                    </GridColumn>
+                    <GridColumn TItem="Location" HeaderText="Province/State" PropertyName="ProvinceState"
+                                SortKeySelector="location => location.ProvinceState" Filterable="true" Sortable="true">
+                        @context.ProvinceState
+                    </GridColumn>
+                    <GridColumn TItem="Location" HeaderText="Country Code" PropertyName="CountryCode"
+                                SortKeySelector="location => location.CountryCode" Filterable="true" Sortable="true">
+                        <CountryFlagEmoji FipsCode="@context.CountryCode"/> @context.CountryCode
+                    </GridColumn>
+                    <GridColumn TItem="Location" HeaderText="Latitude" PropertyName="Latitude"
+                                SortKeySelector="location => location.Latitude" Filterable="false" Sortable="true">
+                        @context.Latitude
+                    </GridColumn>
+                    <GridColumn TItem="Location" HeaderText="Longitude" PropertyName="Longitude"
+                                SortKeySelector="location => location.Longitude" Filterable="false" Sortable="true">
+                        @context.Longitude
+                    </GridColumn>
+                </GridColumns>
+            </Grid>
+        }
+    </BodyTemplate>
+</Modal>

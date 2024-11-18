@@ -1,45 +1,39 @@
 <EditForm Model="SearchRequest" OnValidSubmit="SearchWeather">
     <DataAnnotationsValidator/>
-
-    <div class="card" style="width: 25rem;">
-        <div class="card-body">
-            <h5 class="card-title">Weather API</h5>
-            <p class="card-subtitle">Open-Meteo.com</p>
-            <p class="card-text">Enter the latitude and longitude to get the weather forecast.</p>
-            <p class="card-text">
-                <ValidationSummary/>
-            </p>
-        </div>
-
-        <div class="card-body">
-            <button type="button" class="btn btn-secondary" @onclick="ShowSearchLocationDialog">Search Locations</button>
-        </div>
-
+    
+    <Card>
+        <CardBody>
+            <CardTitle>Weather API</CardTitle>
+            <CardSubTitle>Open-Meteo.com</CardSubTitle>
+            <CardText>Enter the latitude and longitude to get the weather forecast.</CardText>
+        </CardBody>
+        <CardBody>
+            <Button Type="ButtonType.Button" Color="ButtonColor.Info" @onclick="ShowSearchLocationDialog">Search Locations</Button>
+        </CardBody>
         <ul class="list-group list-group-flush">
-            <li>
+            <li class="list-group-item">
                 <div class="form-group">
                     <label for="latitude">Latitude</label>
                     <InputNumber id="latitude" class="form-control" @bind-Value="SearchRequest.Latitude"/>
                 </div>
             </li>
-            <li>
+            <li class="list-group-item">
                 <div class="form-group">
                     <label for="longitude">Longitude</label>
                     <InputNumber id="longitude" class="form-control" @bind-Value="SearchRequest.Longitude"/>
                 </div>
             </li>
-            <li>
+            <li class="list-group-item">
                 <div class="form-group">
                     <label for="forecastDays">Days To Forecast</label>
                     <InputNumber id="forecastDays" class="form-control" @bind-Value="SearchRequest.ForecastDays"/>
                 </div>
             </li>
         </ul>
-
-        <div class="card-body">
-            <button type="submit" class="btn btn-primary">Get Weather</button>
-        </div>
-    </div>
+        <CardBody>
+            <Button Type="ButtonType.Submit" Color="ButtonColor.Primary">Get Weather</Button>
+        </CardBody>
+    </Card>
 </EditForm>
 
 <SearchSelectLocationDialog @ref="_searchSelectLocationDialog" Locations="Locations" OnLocationSelected="SetLocation" 
