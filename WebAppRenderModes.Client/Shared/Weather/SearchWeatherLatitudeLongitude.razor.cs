@@ -14,7 +14,9 @@ public partial class SearchWeatherLatitudeLongitude : ComponentBase
     [EditorRequired]
     [Parameter] public EventCallback<string> OnSearchLocation { get; set; }
     
-    private GetWeatherByLocationRequest SearchRequest { get; set; } = new();
+    [Parameter] public EventCallback OnReset { get; set; }
+    
+    private GetWeatherByLocationRequest _searchRequest = new();
 
     private SearchSelectLocationDialog? _searchSelectLocationDialog;
 
@@ -25,7 +27,7 @@ public partial class SearchWeatherLatitudeLongitude : ComponentBase
         if (OnSearchWeather.HasDelegate)
         {
             _isLoadingWeather = true;
-            await OnSearchWeather.InvokeAsync(SearchRequest);
+            await OnSearchWeather.InvokeAsync(_searchRequest);
             _isLoadingWeather = false;
         }
             
@@ -39,8 +41,8 @@ public partial class SearchWeatherLatitudeLongitude : ComponentBase
 
     private async Task SetLocation(Location location)
     {
-        SearchRequest.Latitude = location.Latitude;
-        SearchRequest.Longitude = location.Longitude;
+        _searchRequest.Latitude = location.Latitude;
+        _searchRequest.Longitude = location.Longitude;
         await Task.Yield(); // Force a re-render
     }
 
@@ -48,5 +50,15 @@ public partial class SearchWeatherLatitudeLongitude : ComponentBase
     {
         if (_searchSelectLocationDialog is not null)
             await _searchSelectLocationDialog.ShowDialog();
+    }
+
+    private async Task Reset()
+    {
+        _searchRequest = new();
+
+        if (OnReset.HasDelegate)
+        {
+            await OnReset.InvokeAsync();
+        }
     }
 }

@@ -29,14 +29,14 @@ public class WeatherService : IWeatherService
             httpResponse.EnsureSuccessStatusCode();
 
             string json = await httpResponse.Content.ReadAsStringAsync();
-            WeatherApiResponse? weatherData = JsonSerializer.Deserialize<WeatherApiResponse>(json);
+            WeatherApiResponse? weatherApiResponse = JsonSerializer.Deserialize<WeatherApiResponse>(json);
 
-            if (weatherData is null)
+            if (weatherApiResponse is null)
             {
                 throw new Exception("Failed to parse response from API into WeatherApiResponse class");
             }
             
-            response = new GetWeatherByLocationResponse(weatherData);
+            response = new GetWeatherByLocationResponse(weatherApiResponse);
         }
         catch (Exception e)
         {

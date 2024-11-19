@@ -1,31 +1,9 @@
 ﻿@page "/"
-@using WebAppRenderModes.Shared
 
 <PageTitle>Home</PageTitle>
-
-<h1>The following is from Interactive Server</h1>
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
 
 <br />
-
-
-
-
-@code {
-    [Inject] private TestService TestingService { get; set; }
-
-    private string _successMessage = string.Empty;
-    private string _interactiveServerMessage = string.Empty;
-
-    private string _inputText = string.Empty;
-
-    private async Task OnClick()
-    {
-        TestingService.SetTestMessage(_inputText);
-    }
-
-}
-

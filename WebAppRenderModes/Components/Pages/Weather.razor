@@ -4,29 +4,30 @@
 
 <PageTitle>Weather</PageTitle>
 
-<div class="row justify-content-center">
-    <div class="col-xs-12 col-lg-6 col-xl-4">
-        <SearchWeatherLatitudeLongitude Locations="_locations" OnSearchLocation="SearchLocations" OnSearchWeather="GetWeather"/>
+@if (_errorMessage is not null)
+{
+    <Callout Color="CalloutColor.Danger">
+        @_errorMessage
+    </Callout>
+}
+
+<div class="row">
+    <div class="col-xs-12 col-xl-4">
+        <SearchWeatherLatitudeLongitude Locations="_locations" OnSearchLocation="SearchLocations" 
+                                        OnSearchWeather="GetWeather" OnReset="Reset" />
     </div>
+    @if (_response is { IsSuccess: true })
+    {
+        <div class="col-xs col-xl-8 mb-2">
+            <WeatherChart Title="Temperatures" XAxisLabel="Date" YAxisLabel="Temp (Celsius)" Data="_temperateData"
+                          Labels="_chartLabels"  />
+
+            <WeatherChart Title="Wind" XAxisLabel="Date" YAxisLabel="Speed (Km/h)" Data="_windData"
+                          Labels="_chartLabels"  />
+        </div>
+    }
     <div class="col-xs-12">
-        @if (_errorMessage is not null)
-        {
-            <Callout Color="CalloutColor.Danger">
-                @_errorMessage
-            </Callout>
-        }
-
-        @if (_isLoading && _lastRequest is not null && _response is null)
-        {
-            <PlaceholderContainer Animation="PlaceholderAnimation.Glow">
-                @for (int i = 0; i < _lastRequest.ForecastDays + 1; i++)
-                {
-                    <Placeholder Style="width: 100%;" Size="PlaceholderSize.Large"/>
-                }
-            </PlaceholderContainer>
-        }
-
-        @if (_response is not null && _response.IsSuccess)
+        @if (_response is { IsSuccess: true })
         {
             <WeatherInfoGrid DailyWeatherInfo="@_response.DailyWeatherInfo" />
         }

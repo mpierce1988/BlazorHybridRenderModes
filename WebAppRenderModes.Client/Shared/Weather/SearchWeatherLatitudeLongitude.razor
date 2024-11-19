@@ -1,4 +1,4 @@
-<EditForm Model="SearchRequest" OnValidSubmit="SearchWeather">
+<EditForm Model="_searchRequest" OnValidSubmit="SearchWeather">
     <DataAnnotationsValidator/>
     
     <Card>
@@ -14,19 +14,19 @@
             <li class="list-group-item">
                 <div class="form-group">
                     <label for="latitude">Latitude</label>
-                    <InputNumber id="latitude" class="form-control" @bind-Value="SearchRequest.Latitude"/>
+                    <InputNumber id="latitude" class="form-control" @bind-Value="_searchRequest.Latitude"/>
                 </div>
             </li>
             <li class="list-group-item">
                 <div class="form-group">
                     <label for="longitude">Longitude</label>
-                    <InputNumber id="longitude" class="form-control" @bind-Value="SearchRequest.Longitude"/>
+                    <InputNumber id="longitude" class="form-control" @bind-Value="_searchRequest.Longitude"/>
                 </div>
             </li>
             <li class="list-group-item">
                 <div class="form-group">
                     <label for="forecastDays">Days To Forecast</label>
-                    <InputNumber id="forecastDays" class="form-control" @bind-Value="SearchRequest.ForecastDays"/>
+                    <InputNumber id="forecastDays" class="form-control" @bind-Value="_searchRequest.ForecastDays"/>
                 </div>
             </li>
         </ul>
@@ -38,6 +38,7 @@
                     <Spinner Color="SpinnerColor.Light" Type="SpinnerType.Dots" Size="SpinnerSize.Small" />
                 }
             </Button>
+            <Button Type="ButtonType.Button" Color="ButtonColor.Secondary" @onclick="Reset">Reset</Button>
         </CardBody>
     </Card>
 </EditForm>
