@@ -80,8 +80,5 @@ _Weather Forecast_
 ![image](https://github.com/user-attachments/assets/97a7ff6c-72bd-470f-8ae6-2b7063faa8c5)
 
 _Weather Search Control_
-![image](https://github.com/user-attachments/assets/7e4183c8-48e1-46a4-bc0a-1d2c65545473)
 
-
-
-
+![image](https://github.com/user-attachments/assets/38a693f3-ee39-473f-85fa-f48785989d5e)
